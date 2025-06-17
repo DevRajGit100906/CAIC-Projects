@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        @font-face {
+            font-family: 'Algerian';
+            src: local('Algerian'), url('https://fonts.cdnfonts.com/s/17444/Algerian.woff') format('woff');
+            font-weight: bold;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            background-color: black !important;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70px;
+        }
+
+        .navbar span {
+            font-family: 'Algerian', serif, cursive, sans-serif;
+            color: #fff685;
+            font-size: 5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-align: center;
+            width: 100%;
+            display: block;
+            transition: background 0.3s, color 0.3s;
+        }
+    </style>
+</head>
+
+<body
+    style="background-color: #51e2f5; color: #101357; font-family: 'Times New Roman', Times, serif, cursive, sans-serif;">
+    <nav class="navbar">
+        <span>SOCIAL MEDIA HANDLER</span>
+    </nav>
+    <div class="content" style="margin-top: 80px; padding: 20px; text-align: center; font-size: 1.8rem;">
+        <h1>Welcome to the Social Media Handler</h1>
+        <p>Use this tool to predict the engagement on your posts!</p>
+        <p>We will take input from you to make predictions.</p>
+        <p>You need to provide us with the content you are posting, the day and time of the post, the inferred company
+            and any media files that may be relevant.</p>
+        <p>To get started, please click on the button below.</p>
+        <a href="{{ url_for('predict_page') }}">
+            <button type="button" class="btn btn-primary"
+                style="padding: 10px 20px; font-size: 1.5rem; background-color: #8458B3; color: #fff; border: none;
+                border-radius: 5px; cursor: pointer;">
+                Get Started
+            </button>
+        </a>
+    </div>
+</body>
+
+</html>
