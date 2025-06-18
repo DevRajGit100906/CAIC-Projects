@@ -195,7 +195,12 @@
             {{ form.hidden_tag() }}
 
             <div class="form-container">
-                <div class="form-group full-width">
+                <div class="form-group">
+                    {{ form.username.label }}
+                    {{ form.username(placeholder="e.g., john_doe") }}
+                </div>
+                
+                <div class="form-group">
                     {{ form.content.label }}
                     {{ form.content(placeholder="What are you posting about?") }}
                 </div>
@@ -244,32 +249,15 @@
     </div>
 
     <script>
-        document.querySelector('form').addEventListener('submit', function (e) {
-            // Basic validation
-            const content = document.querySelector('#content').value;
-            const datetime = document.querySelector('#datetime').value;
-            const company = document.querySelector('#company').value;
-
-            if (!content.trim() || !datetime.trim() || !company.trim()) {
-                e.preventDefault();
-                alert('Please fill in all required fields: Content, Date/Time, and Company');
-                return;
-            }
-
-            // Show loading state
-            const submitBtn = document.querySelector('.btn');
-            submitBtn.textContent = 'Predicting...';
-            submitBtn.disabled = true;
+        // Show result container only if prediction is available
+        document.addEventListener('DOMContentLoaded', function () {
+            const resultContainer = document.getElementById('resultContainer');
+            {% if prediction %}
+            resultContainer.style.display = 'block';
+            {% else %}
+            resultContainer.style.display = 'none';
+            {% endif %}
         });
-        if (hasPrediction) {
-            setTimeout(function () {
-                document.getElementById('resultContainer').scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
-            }, 500);
-        }
-    </script>
 
     </script>
 </body>
