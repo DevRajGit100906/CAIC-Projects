@@ -17,7 +17,7 @@ class AITweetGenerator:
                 do_sample=True,
                 pad_token_id=self.tokenizer.eos_token_id
             )
-        
+    
         generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         tweet = generated_text[len(prompt):].strip()
         return tweet
