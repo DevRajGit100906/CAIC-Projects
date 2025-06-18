@@ -2,6 +2,8 @@ from likes import app
 from flask import render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
+import pandas as pd
+df = pd.read_excel('Cleaned_Dataset.xlsx')
 
 class PredictionForm(FlaskForm):
     username = StringField('Username')
@@ -28,6 +30,8 @@ def predict_page():
         word_count = len(post_content.split())
         content_length = len(post_content)
         Is_weekend = post_datetime.lower() in ['saturday', 'sunday']
-        Release__time_year = post_datetime.split('-')[0] if '-' in post_datetime else 'Unknown'     
+        Release__time_year = post_datetime.split('-')[0] if '-' in post_datetime else 'Unknown'
+        if username in df['Username'].values:
+            
         return render_template('predict.html', form=form)
     return render_template('predict.html', form=form)
