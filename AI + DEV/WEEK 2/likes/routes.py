@@ -4,6 +4,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 
 class PredictionForm(FlaskForm):
+    username = StringField('Username')
     content = StringField('Content of the post')
     datetime = StringField('Day and time of the post')
     company = StringField('Inferred company')
@@ -19,6 +20,7 @@ def home_page():
 def predict_page():
     form = PredictionForm()
     if form.validate_on_submit():
+        username = form.username.data
         post_content = form.content.data
         post_datetime = form.datetime.data
         inferred_company = form.company.data
