@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Tweet Generation Page</title>
@@ -78,7 +79,9 @@
             font-weight: bold;
         }
 
-        input, select, textarea {
+        input,
+        select,
+        textarea {
             width: 100%;
             padding: 10px;
             font-size: 1.1rem;
@@ -88,7 +91,8 @@
             background: #f7f7fa;
         }
 
-        .btn-primary, .btn {
+        .btn-primary,
+        .btn {
             padding: 15px 40px;
             font-size: 1.8rem;
             background-color: #8458B3;
@@ -103,7 +107,8 @@
             display: inline-block;
         }
 
-        .btn-primary:hover, .btn:hover {
+        .btn-primary:hover,
+        .btn:hover {
             background-color: #6d3f9d;
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -113,7 +118,7 @@
             margin-top: 40px;
             background: #fff;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
             padding: 30px;
         }
 
@@ -149,6 +154,7 @@
             color: #101357;
             border: 2px solid #8458B3;
             font-size: 1.2rem;
+            margin-top: 30px;
             padding: 10px 25px;
             border-radius: 8px;
             text-decoration: none;
@@ -160,8 +166,17 @@
             background: #8458B3;
             color: #fff685;
         }
+
+        .btn-same-height {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <span>SOCIAL MEDIA HANDLER</span>
@@ -206,11 +221,12 @@
             </div>
             {% endif %}
             <div class="result-buttons">
-                <button class="btn" onclick="window.location.reload();">Generate Another</button>
-                <a href="{{ url_for('home_page') }}" class="back-btn">Back to Home</a>
+                <button class="btn btn-same-height" onclick="window.location.reload();">Generate Another</button>
+                <a href="{{ url_for('home_page') }}" class="back-btn btn-same-height">Back to Home</a>
             </div>
         </div>
         {% endif %}
     </div>
 </body>
+
 </html>

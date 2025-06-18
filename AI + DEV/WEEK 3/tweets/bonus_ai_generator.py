@@ -20,4 +20,4 @@ class AITweetGenerator:
         
         generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         tweet = generated_text[len(prompt):].strip()
-        return tweet[:280]
+        return tweet
