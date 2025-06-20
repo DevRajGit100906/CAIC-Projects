@@ -1,9 +1,13 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
-from .tweet_generator import tweet_generator
-from .bonus_ai_generator import AITweetGenerator
-from tweets import app
+from tweets.tweet_generator import tweet_generator
+from tweets.bonus_ai_generator import AITweetGenerator
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
+import torch
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your-secret-key'
 
 class TweetForm(FlaskForm):
     company = StringField('Company Name', render_kw={"placeholder": "Enter company name"})
@@ -23,19 +27,18 @@ def tweet_page():
     generated_tweet = None
     ai_generated_tweet = None
     ai = AITweetGenerator()
-    
     if form.validate_on_submit():
-        generated_tweet = tweet_generator.generate_tweet(
-            company=form.company.data,
-            tweet_type=form.tweet_type.data,
-            message=form.message.data,
-            topic=form.topic.data
-        )
-        
-        # Generate AI tweet
-        prompt = f"Generate a {form.tweet_type.data} tweet for {form.company.data} about {form.topic.data}: {form.message.data}"
-        ai_generated_tweet = ai.generate_ai_tweet(prompt)
-        
-    return render_template('tweet.html', form=form, 
-                         generated_tweet=generated_tweet,
-                         ai_generated_tweet=ai_generated_tweet)
+        try:
+            generated_tweet = tweet_generator.generate_tweet(form)
+            ai_generated_tweet = ai.generate_tweet(form)
+        except Exception as e:
+            print(f"Error generating tweet: {e}")
+            generated_tweet = "Could not generate tweet."
+            ai_generated_tweet = "Could not generate tweet."
+        return redirect(url_for('tweet_page'))
+    return render_template(
+        'tweet.html',
+        form=form,
+        generated_tweet=generated_tweet,
+        ai_generated_tweet=ai_generated_tweet
+    )

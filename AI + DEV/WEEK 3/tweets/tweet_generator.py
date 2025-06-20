@@ -1,4 +1,3 @@
-# tweet_generator.py
 import random
 
 class SimpleTweetGenerator:
@@ -20,9 +19,14 @@ class SimpleTweetGenerator:
                 "From the {company} team: {message} 🔥"
             ]
         }
-    
-    def generate_tweet(self, company, tweet_type="general", message="Something awesome!", topic="innovation"):
-        template_list = self.templates.get(tweet_type, self.templates['general'])
+
+    def generate_tweet(self, form):
+        company = form.company.data
+        tweet_type = form.tweet_type.data.lower()
+        message = form.message.data
+        topic = form.topic.data
+
+        template_list = self.templates[tweet_type] if tweet_type in self.templates else self.templates['general']
         template = random.choice(template_list)
         tweet = template.format(
             company=company,
@@ -31,7 +35,5 @@ class SimpleTweetGenerator:
         )
         if len(tweet) > 280:
             tweet = tweet[:277] + "..."
-        
         return tweet
-    
 tweet_generator = SimpleTweetGenerator()
