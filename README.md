@@ -26,10 +26,10 @@ CAIC-Projects/
 │   └── WEEK 2/
 │   └── WEEK 3/
 │   └── WEEK 4/
-│   └── WEEK 5/
 ├── MATHSOC/
 │   ├── WEEK 1/
 │   └── WEEK 2/
 │   └── WEEK 3/
 │   └── WEEK 4/
 └── README.md
+```
